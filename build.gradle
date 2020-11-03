@@ -11,6 +11,7 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
@@ -20,10 +21,16 @@ test {
     useJUnitPlatform()
 }
 
+springBoot {
+    buildInfo()
+}
+
 bootRun.environment([
         "WELCOME_MESSAGE": "hello",
+        "MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE": "*"
 ])
 
 test.environment([
         "WELCOME_MESSAGE": "Hello from test",
+        "MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE": "*"
 ])
