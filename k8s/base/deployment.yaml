@@ -5,6 +5,7 @@ metadata:
   labels:
     app: pal-tracker
 spec:
+  #  replicas: 3
   selector:
     matchLabels:
       app: pal-tracker
@@ -25,6 +26,12 @@ spec:
                 configMapKeyRef:
                   name: pal-tracker
                   key: welcome.message
+
+            - name: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
+              valueFrom:
+                configMapKeyRef:
+                  name: pal-tracker
+                  key: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
           readinessProbe:
             httpGet:
               path: /actuator/health/readiness
@@ -33,3 +40,8 @@ spec:
             preStop:
               exec:
                 command: [ "/bin/sleep", "30" ]
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+            initialDelaySeconds: 150
