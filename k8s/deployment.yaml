@@ -18,10 +18,18 @@ spec:
     spec:
       containers:
         - name: pal-tracker-container
-          image: kcnagareddy/pal-tracker:v1
+          image: kcnagareddy/pal-tracker:v3
           env:
             - name: WELCOME_MESSAGE
               valueFrom:
                 configMapKeyRef:
                   name: pal-tracker
                   key: welcome.message
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+          lifecycle:
+            preStop:
+              exec:
+                command: [ "/bin/sleep", "30" ]
