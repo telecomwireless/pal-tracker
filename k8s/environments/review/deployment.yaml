@@ -2,46 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: pal-tracker
-  labels:
-    app: pal-tracker
 spec:
-  #  replicas: 3
-  selector:
-    matchLabels:
-      app: pal-tracker
-      name: pal-tracker-pod
   template:
-    # Pod definition starts here
-    metadata:
-      labels:
-        app: pal-tracker
-        name: pal-tracker-pod
     spec:
       containers:
         - name: pal-tracker-container
-          image: kcnagareddy/pal-tracker:v3
-          env:
-            - name: WELCOME_MESSAGE
-              valueFrom:
-                configMapKeyRef:
-                  name: pal-tracker
-                  key: welcome.message
-
-            - name: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
-              valueFrom:
-                configMapKeyRef:
-                  name: pal-tracker
-                  key: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
-          readinessProbe:
-            httpGet:
-              path: /actuator/health/readiness
-              port: 8080
-          lifecycle:
-            preStop:
-              exec:
-                command: [ "/bin/sleep", "30" ]
-          livenessProbe:
-            httpGet:
-              path: /actuator/health/liveness
-              port: 8080
-            initialDelaySeconds: 150
+          image: kcnagareddy/pal-tracker:build-concourse.run_number
