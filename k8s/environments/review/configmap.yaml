@@ -5,4 +5,4 @@ metadata:
   labels:
     app: pal-tracker
 data:
-  welcome.message: "hello from review"
+  welcome.message: "hello from review through concourse"
