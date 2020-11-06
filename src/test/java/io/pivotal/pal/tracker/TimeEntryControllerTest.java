@@ -35,6 +35,7 @@ public class TimeEntryControllerTest {
         doReturn(expectedResult)
             .when(timeEntryRepository)
             .create(any(TimeEntry.class));
+        System.out.println("jus adding");
 
         ResponseEntity response = controller.create(timeEntryToCreate);
 
