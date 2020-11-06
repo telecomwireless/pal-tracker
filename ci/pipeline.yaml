@@ -75,7 +75,7 @@ jobs:
             - -exc
             - |
               cd source-code
-              flyway -url="jdbc:postgresql://((REVIEW_DB_SERVER))/((REVIEW_DB_NAME))" -locations=filesystem:databases/tracker clean migrate -user=((REVIEW_DB_USER)) -password='((REVIEW_DB_PASSWORD))
+              flyway -url="jdbc:postgresql://((REVIEW_DB_SERVER))/((REVIEW_DB_NAME))" -locations=filesystem:databases/tracker clean migrate -user=((REVIEW_DB_USER)) -password='((REVIEW_DB_PASSWORD))'
 - name: deploy-to-review
   plan:
   - get: source-code
