@@ -40,7 +40,7 @@ public class TimeEntryController {
     }
 
     @PutMapping("/time-entries/{id}")
-    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody TimeEntry timeEntry){
+    public ResponseEntity update(@PathVariable Long id, @RequestBody TimeEntry timeEntry){
         TimeEntry newEntry = timeRepo.update(id,timeEntry);
         if(newEntry == null){
             return ResponseEntity.notFound().build();
@@ -50,7 +50,7 @@ public class TimeEntryController {
     }
 
     @DeleteMapping("/time-entries/{id}")
-    public ResponseEntity delete(@PathVariable("id") Long id){
+    public ResponseEntity delete(@PathVariable Long id){
         timeRepo.delete(id);
         ResponseEntity response = ResponseEntity.noContent().build();
         return response;
